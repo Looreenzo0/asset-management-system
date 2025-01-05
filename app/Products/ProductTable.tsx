@@ -71,7 +71,7 @@ export function ProductTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [pagination, setPagination] = useState<PaginationType>({
     pageIndex: 0,
-    pageSize: 8,
+    pageSize: 10,
   });
 
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -144,17 +144,20 @@ export function ProductTable<TData, TValue>({
 
   return (
     <div className="poppins">
-      <div className="flex flex-col gap-3 mb-8 mt-6 ">
-        <div className="flex items-center justify-between ">
+      <div className="flex flex-col gap-3 mb-6 mt-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+          {/* Search Input */}
           <Input
             value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
             onChange={(event) =>
               table.getColumn("name")?.setFilterValue(event.target.value)
             }
             placeholder="Search by name..."
-            className="max-w-sm h-10"
+            className="w-full sm:max-w-sm h-10"
           />
-          <div className="flex items-center gap-4 ">
+
+          {/* Dropdowns */}
+          <div className="flex flex-wrap items-center gap-4">
             <StatusDropDown
               selectedStatuses={selectedStatuses}
               setSelectedStatuses={setSelectedStatuses}
@@ -166,7 +169,7 @@ export function ProductTable<TData, TValue>({
           </div>
         </div>
 
-        {/* filter area */}
+        {/* Filter Area */}
         <FilterArea
           selectedStatuses={selectedStatuses}
           setSelectedStatuses={setSelectedStatuses}
@@ -227,21 +230,24 @@ export function ProductTable<TData, TValue>({
         </Table>
       </div>
 
-      <div className="flex items-center justify-between mt-5">
+      <div className="flex flex-wrap items-center justify-between mt-5 gap-3">
+        {/* Pagination Selection */}
         <PaginationSelection
           pagination={pagination}
           setPagination={setPagination}
         />
 
-        <div className="flex gap-6 items-center">
-          <span className="text-sm  text-gray-500">
+        {/* Pagination Controls */}
+        <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6">
+          <span className="text-sm text-gray-500">
             Page {pagination.pageIndex + 1} of {table.getPageCount()}
           </span>
-          <div className="flex items-center justify-end space-x-2 py-4">
+
+          <div className="flex gap-2 sm:gap-3">
             {/* First Page Button */}
             <Button
               variant="outline"
-              className="size-9 w-12"
+              className="w-10 sm:w-12"
               size="sm"
               onClick={() => table.setPageIndex(0)}
               disabled={!table.getCanPreviousPage()}
@@ -252,7 +258,7 @@ export function ProductTable<TData, TValue>({
             {/* Previous Page Button */}
             <Button
               variant="outline"
-              className="size-9 w-12"
+              className="w-10 sm:w-12"
               size="sm"
               onClick={() => table.previousPage()}
               disabled={!table.getCanPreviousPage()}
@@ -262,7 +268,7 @@ export function ProductTable<TData, TValue>({
 
             {/* Next Page Button */}
             <Button
-              className="size-9 w-12"
+              className="w-10 sm:w-12"
               variant="outline"
               size="sm"
               onClick={() => table.nextPage()}
@@ -273,7 +279,7 @@ export function ProductTable<TData, TValue>({
 
             {/* Last Page Button */}
             <Button
-              className="size-9 w-12"
+              className="w-10 sm:w-12"
               variant="outline"
               size="sm"
               onClick={() => table.setPageIndex(table.getPageCount() - 1)}

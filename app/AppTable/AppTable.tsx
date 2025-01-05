@@ -16,11 +16,13 @@ export default function AppTable() {
   }, []);
 
   return (
-    <Card className="mt-12  flex flex-col shadow-none  poppins border-none ">
-      <CardHeader className="flex justify-between">
+    <Card className="mt-10 flex flex-col shadow-none poppins border-none">
+      <CardHeader className="flex justify-between p-2">
         <div className="flex justify-between items-center">
           <div className="">
-            <CardTitle className="font-bold text-[23px] ">Products</CardTitle>
+            <CardTitle className="font-semibold text-[23px]">
+              Products
+            </CardTitle>
             <p className="text-sm text-slate-600">
               {allProducts.length} products
             </p>
@@ -29,7 +31,8 @@ export default function AppTable() {
         </div>
       </CardHeader>
 
-      <CardContent>
+      <CardContent className="px-2">
+        {/* Add padding here to match CardHeader */}
         <ProductTable data={allProducts} columns={columns} />
       </CardContent>
     </Card>
